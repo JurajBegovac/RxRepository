@@ -16,15 +16,15 @@ import javax.inject.Singleton
 @Module
 class RealmDaggerModule(@ApplicationContext private val context: Context) {
 
-    init {
-        Realm.init(context)
-        val realmDefaultConfig = RealmConfiguration.Builder()
-                .schemaVersion(1)
-                .build()
-        Realm.setDefaultConfiguration(realmDefaultConfig)
-    }
+  init {
+    Realm.init(context)
+    val realmDefaultConfig = RealmConfiguration.Builder()
+      .schemaVersion(1)
+      .build()
+    Realm.setDefaultConfiguration(realmDefaultConfig)
+  }
 
-    @Singleton
-    @Provides
-    fun todoRepository(): TodoRepository = TodoRealmRepository()
+  @Singleton
+  @Provides
+  fun todoRepository(): TodoRepository = TodoRealmRepository()
 }

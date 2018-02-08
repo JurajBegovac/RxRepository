@@ -10,7 +10,6 @@ import javax.inject.Qualifier
 @Retention(AnnotationRetention.RUNTIME)
 annotation class ApplicationContext
 
-
 @Qualifier
 @MustBeDocumented
 @Retention(AnnotationRetention.RUNTIME)

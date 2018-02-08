@@ -14,15 +14,15 @@ import javax.inject.Inject
  */
 abstract class DaggerAppCompatActivity : AppCompatActivity(), HasFragmentInjector {
 
-    @Inject
-    lateinit var fragmentInjector: DispatchingAndroidInjector<Fragment>
+  @Inject
+  lateinit var fragmentInjector: DispatchingAndroidInjector<Fragment>
 
-    override fun onCreate(savedInstanceState: Bundle?) {
-        AndroidInjection.inject(this)
-        super.onCreate(savedInstanceState)
-    }
+  override fun onCreate(savedInstanceState: Bundle?) {
+    AndroidInjection.inject(this)
+    super.onCreate(savedInstanceState)
+  }
 
-    override fun fragmentInjector(): AndroidInjector<Fragment>? {
-        return fragmentInjector
-    }
+  override fun fragmentInjector(): AndroidInjector<Fragment>? {
+    return fragmentInjector
+  }
 }

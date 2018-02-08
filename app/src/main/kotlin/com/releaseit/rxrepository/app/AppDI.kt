@@ -19,59 +19,49 @@ import javax.inject.Singleton
 @Module
 class AppModule {
 
-    @Provides
-    @Singleton
-    @ApplicationContext
-    fun context(app: App): Context {
-        return app
-    }
+  @Provides
+  @Singleton
+  @ApplicationContext
+  fun context(app: App): Context {
+    return app
+  }
 
-    @Provides
-    @Singleton
-    fun sharedPrefs(@ApplicationContext context: Context) = context.getSharedPreferences(PREF_NAME, Context.MODE_PRIVATE)
+  @Provides
+  @Singleton
+  fun sharedPrefs(@ApplicationContext context: Context) = context.getSharedPreferences(PREF_NAME, Context.MODE_PRIVATE)
 
 }
 
 @Singleton
-@Component(modules = [
-    AndroidSupportInjectionModule::class,
-    ActivityBuilder::class,
-    AppModule::class,
-    RoomModule::class
-])
+@Component(modules = [AndroidSupportInjectionModule::class, ActivityBuilder::class, AppModule::class, RoomModule::class])
 interface AppComponent {
 
-    fun inject(target: App)
+  fun inject(target: App)
 
-    @Component.Builder
-    interface Builder {
+  @Component.Builder
+  interface Builder {
 
-        @BindsInstance
-        fun application(app: App): Builder
+    @BindsInstance
+    fun application(app: App): Builder
 
-        fun roomModule(roomModule: RoomModule): Builder
+    fun roomModule(roomModule: RoomModule): Builder
 
-        fun build(): AppComponent
-    }
+    fun build(): AppComponent
+  }
 }
 
 @Singleton
-@Component(modules = [
-    AndroidSupportInjectionModule::class,
-    ActivityBuilder::class,
-    AppModule::class,
-    RealmDaggerModule::class
-])
+@Component(modules = [AndroidSupportInjectionModule::class, ActivityBuilder::class, AppModule::class, RealmDaggerModule::class])
 interface RealmAppComponent : AppComponent {
 
-    @Component.Builder
-    interface Builder {
+  @Component.Builder
+  interface Builder {
 
-        @BindsInstance
-        fun application(app: App): Builder
+    @BindsInstance
+    fun application(app: App): Builder
 
-        fun realmModule(realmModule: RealmDaggerModule): Builder
+    fun realmModule(realmModule: RealmDaggerModule): Builder
 
-        fun build(): AppComponent
-    }
+    fun build(): AppComponent
+  }
 }

@@ -17,19 +17,17 @@ import javax.inject.Singleton
 @Module
 class RoomModule(@ApplicationContext private val context: Context) {
 
-    @Singleton
-    @Provides
-    fun providesAppDatabase(): AppDatabase =
-            Room.databaseBuilder(context, AppDatabase::class.java, "rx-repo-db")
-                    .build()
+  @Singleton
+  @Provides
+  fun providesAppDatabase(): AppDatabase = Room.databaseBuilder(context, AppDatabase::class.java, "rx-repo-db").build()
 
-    @Singleton
-    @Provides
-    fun todoDao(database: AppDatabase) = database.todoDao()
+  @Singleton
+  @Provides
+  fun todoDao(database: AppDatabase) = database.todoDao()
 
 
-    @Singleton
-    @Provides
-    fun todoRepository(todoDao: TodoDao): TodoRepository = TodoRoomRepository(todoDao)
+  @Singleton
+  @Provides
+  fun todoRepository(todoDao: TodoDao): TodoRepository = TodoRoomRepository(todoDao)
 
 }

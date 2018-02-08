@@ -12,7 +12,7 @@ import java.util.*
 data class Todo(val id: String = UUID.randomUUID().toString(), val title: String, val message: String)
 
 interface TodoRepository : Repository<Todo> {
-    fun all(): Flowable<List<Todo>>
+  fun all(): Flowable<List<Todo>>
 
-    fun observeFirstWith(title: String): Flowable<Option<Todo>>
+  fun observeFirstWith(title: String): Flowable<Option<Todo>>
 }

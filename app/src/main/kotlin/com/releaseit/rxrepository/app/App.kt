@@ -19,33 +19,32 @@ import javax.inject.Inject
 
 class App : Application(), HasActivityInjector {
 
-    @Inject
-    lateinit var dispatchingActivityInjector: DispatchingAndroidInjector<Activity>
+  @Inject
+  lateinit var dispatchingActivityInjector: DispatchingAndroidInjector<Activity>
 
-    private lateinit var appComponent: AppComponent
+  private lateinit var appComponent: AppComponent
 
-    override fun onCreate() {
-        super.onCreate()
-        if (ProcessPhoenix.isPhoenixProcess(this))
-            return
+  override fun onCreate() {
+    super.onCreate()
+    if (ProcessPhoenix.isPhoenixProcess(this)) return
 
-        appComponent = buildAppComponent()
-        appComponent.inject(this)
+    appComponent = buildAppComponent()
+    appComponent.inject(this)
+  }
+
+  override fun activityInjector(): AndroidInjector<Activity> {
+    return dispatchingActivityInjector
+  }
+
+  private fun buildAppComponent(): AppComponent {
+    val localDb = getSharedPreferences(PREF_NAME, Context.MODE_PRIVATE).getLocalDb()
+    return when (localDb) {
+      LocalDb.SQLITE -> DaggerAppComponent.builder().application(this).roomModule(RoomModule(this)).build()
+      LocalDb.REALM  -> DaggerRealmAppComponent.builder().application(this).realmModule(RealmDaggerModule(this)).build()
     }
+  }
 
-    override fun activityInjector(): AndroidInjector<Activity> {
-        return dispatchingActivityInjector
-    }
-
-    private fun buildAppComponent(): AppComponent {
-        val localDb = getSharedPreferences(PREF_NAME, Context.MODE_PRIVATE).getLocalDb()
-        return when (localDb) {
-            LocalDb.SQLITE -> DaggerAppComponent.builder().application(this).roomModule(RoomModule(this)).build()
-            LocalDb.REALM -> DaggerRealmAppComponent.builder().application(this).realmModule(RealmDaggerModule(this)).build()
-        }
-    }
-
-    fun restart() {
-        ProcessPhoenix.triggerRebirth(this)
-    }
+  fun restart() {
+    ProcessPhoenix.triggerRebirth(this)
+  }
 }

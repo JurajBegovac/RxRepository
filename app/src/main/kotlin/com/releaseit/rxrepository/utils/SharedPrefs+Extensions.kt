@@ -11,7 +11,7 @@ const val KEY = "$PREF_NAME.key"
 const val KEY_LOCAL_DB = "$KEY.localdb"
 
 enum class LocalDb {
-    SQLITE, REALM
+  SQLITE, REALM
 }
 
 fun SharedPreferences.getLocalDb() = LocalDb.valueOf(getString(KEY_LOCAL_DB, LocalDb.SQLITE.name))
