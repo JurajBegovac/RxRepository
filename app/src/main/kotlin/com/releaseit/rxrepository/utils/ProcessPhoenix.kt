@@ -75,7 +75,8 @@ class ProcessPhoenix : Activity() {
         return defaultIntent
       }
 
-      throw IllegalStateException("Unable to determine default activity for " + packageName + ". Does an activity specify the DEFAULT category in its intent filter?")
+      throw IllegalStateException("Unable to determine default activity for $packageName. " +
+                                  "Does an activity specify the DEFAULT category in its intent filter?")
     }
 
     /**
