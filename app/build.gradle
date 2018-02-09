@@ -64,6 +64,7 @@ ext {
     supportVersion = '27.0.2'
     daggerVersion = '2.14.1'
     roomVersion = '1.0.0'
+    archLifecycleVersion = '1.1.0'
     anko_version = '0.10.4'
 }
 
@@ -72,6 +73,8 @@ dependencies {
     implementation "org.jetbrains.kotlin:kotlin-stdlib-jre8:$kotlin_version"
 
     implementation "com.android.support:appcompat-v7:$supportVersion"
+    implementation "com.android.support:design:$supportVersion"
+    implementation "com.android.support:recyclerview-v7:$supportVersion"
     implementation 'com.android.support.constraint:constraint-layout:1.0.2'
 
     // functional kotlin
@@ -93,10 +96,21 @@ dependencies {
     implementation "android.arch.persistence.room:rxjava2:$roomVersion"
     kapt "android.arch.persistence.room:compiler:$roomVersion"
 
+    // lifecycle aware components
+    implementation 'android.arch.lifecycle:livedata:' + archLifecycleVersion
+    implementation 'android.arch.lifecycle:viewmodel:' + archLifecycleVersion
+    implementation 'android.arch.lifecycle:extensions:' + archLifecycleVersion
+    annotationProcessor 'android.arch.lifecycle:compiler:' + archLifecycleVersion
+
     // anko
     implementation("org.jetbrains.anko:anko:$anko_version") {
         exclude module: 'anko-sqlite'
     }
+    implementation "org.jetbrains.anko:anko-design:$anko_version"
+    implementation "org.jetbrains.anko:anko-design-coroutines:$anko_version"
+    compile "org.jetbrains.anko:anko-recyclerview-v7:$anko_version"
+    compile "org.jetbrains.anko:anko-recyclerview-v7-coroutines:$anko_version"
+    compile "org.jetbrains.anko:anko-constraint-layout:$anko_version"
 
     testImplementation 'junit:junit:4.12'
     androidTestImplementation 'com.android.support.test:runner:1.0.1'
