@@ -11,11 +11,11 @@ import org.funktionale.option.Option
 
 interface DbProvider<Item, DbProvider> : Repository<Item> {
 
-  fun update(updateSpecification: UpdateSpecification<DbProvider>) // maybe we should return number of updated items
+  fun update(updateSpecification: UpdateSpecification<DbProvider>)
 
-  fun insertOrUpdate(insertOrUpdateSpecification: InsertOrUpdateSpecification<DbProvider>)  //  maybe we should return number of inserted/updated items
+  fun insertOrUpdate(insertOrUpdateSpecification: InsertOrUpdateSpecification<DbProvider>)
 
-  fun delete(deleteSpecification: DeleteSpecification<DbProvider>) // maybe we should return number of deleted item
+  fun delete(deleteSpecification: DeleteSpecification<DbProvider>)
 
   fun get(querySpecification: QuerySpecification<Option<Item>, DbProvider>): Flowable<Option<Item>>
 

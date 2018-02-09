@@ -74,8 +74,9 @@ abstract class RealmRepository<Item, RealmDbModel : RealmObject>(private val map
 }
 
 
-class RealmQuerySpecification<T, RealmDbModel : RealmObject>(private val realmResultsMapper: (Realm) -> RealmResults<RealmDbModel>,
-                                                             private val returnMapper: (RealmResults<RealmDbModel>) -> T) :
+class RealmQuerySpecification<T, RealmDbModel : RealmObject>
+(private val realmResultsMapper: (Realm) -> RealmResults<RealmDbModel>,
+ private val returnMapper: (RealmResults<RealmDbModel>) -> T) :
   QuerySpecification<T, Realm> {
 
   override fun apply(realm: Realm): Flowable<T> {
@@ -83,9 +84,10 @@ class RealmQuerySpecification<T, RealmDbModel : RealmObject>(private val realmRe
                              val realmResults = realmResultsMapper(realm)
                              e.onNext(returnMapper(realmResults))
 
-                             val realmChangeListener: RealmChangeListener<RealmResults<RealmDbModel>> = RealmChangeListener {
-                               e.onNext(returnMapper(it))
-                             }
+                             val realmChangeListener: RealmChangeListener<RealmResults<RealmDbModel>> =
+                               RealmChangeListener {
+                                 e.onNext(returnMapper(it))
+                               }
                              realmResults.addChangeListener(realmChangeListener)
 
                              e.setCancellable {

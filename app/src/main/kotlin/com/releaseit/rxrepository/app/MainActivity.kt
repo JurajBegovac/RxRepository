@@ -39,10 +39,13 @@ class MainActivity : DaggerAppCompatActivity() {
 
   override fun onResume() {
     super.onResume()
-    disposable.add(todoRepository.all().subscribeOn(Schedulers.io()).observeOn(AndroidSchedulers.mainThread()).subscribe(
-      {
-        showTodos(it)
-      }))
+    disposable.add(todoRepository.all()
+                     .subscribeOn(Schedulers.io())
+                     .observeOn(AndroidSchedulers.mainThread())
+                     .subscribe(
+                       {
+                         showTodos(it)
+                       }))
   }
 
   override fun onPause() {

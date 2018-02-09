@@ -33,7 +33,12 @@ class AppModule {
 }
 
 @Singleton
-@Component(modules = [AndroidSupportInjectionModule::class, ActivityBuilder::class, AppModule::class, RoomModule::class])
+@Component(modules = [
+  AndroidSupportInjectionModule::class,
+  ActivityBuilder::class,
+  AppModule::class,
+  RoomModule::class
+])
 interface AppComponent {
 
   fun inject(target: App)
@@ -51,7 +56,12 @@ interface AppComponent {
 }
 
 @Singleton
-@Component(modules = [AndroidSupportInjectionModule::class, ActivityBuilder::class, AppModule::class, RealmDaggerModule::class])
+@Component(modules = [
+  AndroidSupportInjectionModule::class,
+  ActivityBuilder::class,
+  AppModule::class,
+  RealmDaggerModule::class
+])
 interface RealmAppComponent : AppComponent {
 
   @Component.Builder

@@ -1,4 +1,4 @@
-autoCorrect: true
+autoCorrect: false
 failFast: false
 
 test-pattern: # Configure exclusions for test sources
@@ -20,8 +20,8 @@ test-pattern: # Configure exclusions for test sources
     - 'TooManyFunctions'
 
 build:
-  warningThreshold: 5
-  failThreshold: 10
+  warningThreshold: 0
+  failThreshold: 0
   weights:
     complexity: 2
     formatting: 1
@@ -316,7 +316,7 @@ style:
     ignoreEnums: false
   MaxLineLength:
     active: true
-    maxLineLength: 160
+    maxLineLength: 120
     excludePackageStatements: false
     excludeImportStatements: false
   ModifierOrder:
@@ -359,7 +359,7 @@ style:
   UntilInsteadOfRangeTo:
     active: false
   UnusedImports:
-    active: false
+    active: true
   UseDataClass:
     active: false
     excludeAnnotatedClasses: ""
